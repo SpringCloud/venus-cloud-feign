@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <name>venus-cloud-starter-feign</name>
-    <url>http://maven.apache.org</url>
+    <url>http://springcloud.cn</url>
 
     <properties>
         <java.version>1.8</java.version>

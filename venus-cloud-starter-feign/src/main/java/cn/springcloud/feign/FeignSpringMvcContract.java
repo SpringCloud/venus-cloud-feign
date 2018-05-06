@@ -20,8 +20,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FeignPlusSpringMvcContract extends SpringMvcContract {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FeignPlusSpringMvcContract.class);
+public class FeignSpringMvcContract extends SpringMvcContract {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeignSpringMvcContract.class);
 
     private Pattern pattern = Pattern.compile("(\\{[^}]+\\})");
     // MethodMetadata RequestTemplate 都是final无法优雅扩展 只能通过反射强行修改
@@ -31,7 +32,7 @@ public class FeignPlusSpringMvcContract extends SpringMvcContract {
         requestTemplateUrl.setAccessible(true);
     }
 
-    public FeignPlusSpringMvcContract(List<AnnotatedParameterProcessor> annotatedParameterProcessors, ConversionService conversionService) {
+    public FeignSpringMvcContract(List<AnnotatedParameterProcessor> annotatedParameterProcessors, ConversionService conversionService) {
         super(annotatedParameterProcessors, conversionService);
     }
 

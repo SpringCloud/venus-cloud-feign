@@ -38,17 +38,17 @@ public class FeignAutoConfig {
     private ConfigurableBeanFactory beanFactory;
 
     @Bean
-    public FeignPlusRequestInterceptor feignPlusRequestInterceptor() {
-        return new FeignPlusRequestInterceptor();
+    public FeignRequestInterceptor feignPlusRequestInterceptor() {
+        return new FeignRequestInterceptor();
     }
 
     @Bean
-    public FeignPlusSpringMvcContract feignPlusSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
-                                                                 ConversionService conversionService) {
+    public FeignSpringMvcContract feignPlusSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
+                                                             ConversionService conversionService) {
         if (null == parameterProcessors) {
             parameterProcessors = new ArrayList<>();
         }
-        return new FeignPlusSpringMvcContract(parameterProcessors, conversionService);
+        return new FeignSpringMvcContract(parameterProcessors, conversionService);
     }
 
     public static MethodParameter interfaceMethodParameter(MethodParameter parameter, Class annotationType) {

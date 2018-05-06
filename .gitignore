@@ -80,4 +80,5 @@ __pycache__/
 # SVN metadata
 .svn/
 
+.idea
 

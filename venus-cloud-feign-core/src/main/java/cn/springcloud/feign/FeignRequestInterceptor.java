@@ -5,11 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * FeignRequestInterceptor
+ *
+ * @author Charles He
+ * @date 2018/5/11
+ */
 public class FeignRequestInterceptor implements RequestInterceptor {
 
     @Autowired
@@ -18,12 +25,12 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         // feign 不支持 GET 方法传 POJO, json body转query
-        if (template.method().equals("GET") && template.body() != null) {
+        if (HttpMethod.GET.matches(template.method()) && template.body() != null) {
             try {
                 JsonNode jsonNode = objectMapper.readTree(template.body());
                 template.body(null);
 
-                Map<String, Collection<String>> queries = new HashMap<>();
+                Map<String, Collection<String>> queries = new HashMap<>(jsonNode.size());
                 buildQuery(jsonNode, "", queries);
                 template.queries(queries);
             } catch (IOException e) {
@@ -33,7 +40,8 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     }
 
     private void buildQuery(JsonNode jsonNode, String path, Map<String, Collection<String>> queries) {
-        if (!jsonNode.isContainerNode()) {   // 叶子节点
+        // 叶子节点
+        if (!jsonNode.isContainerNode()) {
             if (jsonNode.isNull()) {
                 return;
             }
@@ -45,7 +53,8 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             values.add(jsonNode.asText());
             return;
         }
-        if (jsonNode.isArray()) {   // 数组节点
+        // 数组节点
+        if (jsonNode.isArray()) {
             Iterator<JsonNode> it = jsonNode.elements();
             while (it.hasNext()) {
                 buildQuery(it.next(), path, queries);

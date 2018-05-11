@@ -27,6 +27,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FeignAutoConfig
+ *
+ * @author Charles He
+ * @date 2018/5/11
+ */
 @Configuration
 @ConditionalOnClass(Feign.class)
 public class FeignAutoConfig {
@@ -38,12 +44,12 @@ public class FeignAutoConfig {
     private ConfigurableBeanFactory beanFactory;
 
     @Bean
-    public FeignRequestInterceptor feignPlusRequestInterceptor() {
+    public FeignRequestInterceptor feignRequestInterceptor() {
         return new FeignRequestInterceptor();
     }
 
     @Bean
-    public FeignSpringMvcContract feignPlusSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
+    public FeignSpringMvcContract feignSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
                                                              ConversionService conversionService) {
         if (null == parameterProcessors) {
             parameterProcessors = new ArrayList<>();
@@ -72,7 +78,8 @@ public class FeignAutoConfig {
     public void modifyArgumentResolvers() {
         List<HandlerMethodArgumentResolver> list = new ArrayList<>(adapter.getArgumentResolvers());
 
-        list.add(0, new PathVariableMethodArgumentResolver() {  // PathVariable 支持接口注解
+        // PathVariable 支持接口注解
+        list.add(0, new PathVariableMethodArgumentResolver() {
             @Override
             public boolean supportsParameter(MethodParameter parameter) {
                 return super.supportsParameter(interfaceMethodParameter(parameter, PathVariable.class));
@@ -84,7 +91,8 @@ public class FeignAutoConfig {
             }
         });
 
-        list.add(0, new RequestHeaderMethodArgumentResolver(beanFactory) {  // RequestHeader 支持接口注解
+        // RequestHeader 支持接口注解
+        list.add(0, new RequestHeaderMethodArgumentResolver(beanFactory) {
             @Override
             public boolean supportsParameter(MethodParameter parameter) {
                 return super.supportsParameter(interfaceMethodParameter(parameter, RequestHeader.class));
@@ -96,7 +104,8 @@ public class FeignAutoConfig {
             }
         });
 
-        list.add(0, new ServletCookieValueMethodArgumentResolver(beanFactory) {  // CookieValue 支持接口注解
+        // CookieValue 支持接口注解
+        list.add(0, new ServletCookieValueMethodArgumentResolver(beanFactory) {
             @Override
             public boolean supportsParameter(MethodParameter parameter) {
                 return super.supportsParameter(interfaceMethodParameter(parameter, CookieValue.class));
@@ -108,14 +117,15 @@ public class FeignAutoConfig {
             }
         });
 
-        list.add(0, new RequestResponseBodyMethodProcessor(adapter.getMessageConverters()) {    // RequestBody 支持接口注解
+        // RequestBody Valid 支持接口注解
+        list.add(0, new RequestResponseBodyMethodProcessor(adapter.getMessageConverters()) {
             @Override
             public boolean supportsParameter(MethodParameter parameter) {
                 return super.supportsParameter(interfaceMethodParameter(parameter, RequestBody.class));
             }
 
             @Override
-            protected void validateIfApplicable(WebDataBinder binder, MethodParameter methodParam) {    // 支持@Valid验证
+            protected void validateIfApplicable(WebDataBinder binder, MethodParameter methodParam) {
                 super.validateIfApplicable(binder, interfaceMethodParameter(methodParam, Valid.class));
             }
         });

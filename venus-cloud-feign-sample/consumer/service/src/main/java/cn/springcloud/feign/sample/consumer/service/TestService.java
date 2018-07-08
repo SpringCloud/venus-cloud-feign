@@ -21,7 +21,7 @@ public class TestService {
         pojo.setName("charles");
         pojo.setAge(18);
         pojo.setBirthday(new Date());
-        return "Test " + providerService.hello(1L, null);
+        return "Test " + providerService.hello(pojo);
     }
 
 }

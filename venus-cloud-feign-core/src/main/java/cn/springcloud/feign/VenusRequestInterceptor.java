@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * FeignRequestInterceptor
+ * VenusRequestInterceptor
  *
  * @author Charles He
  * @date 2018/5/11
  */
-public class FeignRequestInterceptor implements RequestInterceptor {
+public class VenusRequestInterceptor implements RequestInterceptor {
 
     @Autowired
     private ObjectMapper objectMapper;

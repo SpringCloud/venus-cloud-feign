@@ -28,14 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * FeignAutoConfig
+ * VenusFeignAutoConfig
  *
  * @author Charles He
  * @date 2018/5/11
  */
 @Configuration
 @ConditionalOnClass(Feign.class)
-public class FeignAutoConfig {
+public class VenusFeignAutoConfig {
 
     @Autowired
     private RequestMappingHandlerAdapter adapter;
@@ -44,17 +44,17 @@ public class FeignAutoConfig {
     private ConfigurableBeanFactory beanFactory;
 
     @Bean
-    public FeignRequestInterceptor feignRequestInterceptor() {
-        return new FeignRequestInterceptor();
+    public VenusRequestInterceptor feignRequestInterceptor() {
+        return new VenusRequestInterceptor();
     }
 
     @Bean
-    public FeignSpringMvcContract feignSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
-                                                             ConversionService conversionService) {
+    public VenusSpringMvcContract feignSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
+                                                         ConversionService conversionService) {
         if (null == parameterProcessors) {
             parameterProcessors = new ArrayList<>();
         }
-        return new FeignSpringMvcContract(parameterProcessors, conversionService);
+        return new VenusSpringMvcContract(parameterProcessors, conversionService);
     }
 
     public static MethodParameter interfaceMethodParameter(MethodParameter parameter, Class annotationType) {

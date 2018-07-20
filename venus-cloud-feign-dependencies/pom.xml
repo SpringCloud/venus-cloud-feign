@@ -4,7 +4,7 @@
 
     <groupId>cn.springcloud.feign</groupId>
     <artifactId>venus-cloud-feign-dependencies</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>venus-cloud-feign-dependencies</name>

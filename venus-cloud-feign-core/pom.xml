@@ -7,10 +7,14 @@
     <parent>
         <artifactId>venus-cloud-feign</artifactId>
         <groupId>cn.springcloud.feign</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>venus-cloud-feign-core</artifactId>
+
+    <name>venus-cloud-feign-core</name>
+    <url>http://springcloud.cn</url>
+    <description>venus-cloud-feign is a component for enhance Spring Cloud Feign</description>
 
     <dependencies>
         <dependency>

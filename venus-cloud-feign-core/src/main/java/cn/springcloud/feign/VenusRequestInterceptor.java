@@ -15,7 +15,6 @@ import java.util.*;
  * VenusRequestInterceptor
  *
  * @author Charles He
- * @date 2018/5/11
  */
 public class VenusRequestInterceptor implements RequestInterceptor {
 

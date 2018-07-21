@@ -31,7 +31,6 @@ import java.util.List;
  * VenusFeignAutoConfig
  *
  * @author Charles He
- * @date 2018/5/11
  */
 @Configuration
 @ConditionalOnClass(Feign.class)

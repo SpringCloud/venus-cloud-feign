@@ -5,11 +5,15 @@
     <parent>
         <groupId>cn.springcloud.feign</groupId>
         <artifactId>venus-cloud-feign-sample</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>venus-cloud-feign-sample-eureka</artifactId>
+
+    <name>venus-cloud-feign-sample-eureka</name>
+    <url>http://springcloud.cn</url>
+    <description>venus-cloud-feign-sample-eureka is a eureka in this sample</description>
 
     <dependencies>
         <dependency>

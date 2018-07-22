@@ -6,8 +6,13 @@
 ## 项目开发规范
  ### 包名规范
     cn.springcloud.feign
-## 调研功能参考
-https://github.com/jmnarloch/feign-oauth2-spring-cloud-starter
+## 使用
+目前已经发布到Maven中央仓库：
+```
+<dependency>
+    <groupId>cn.springcloud.feign</groupId>
+    <artifactId>venus-cloud-starter-feign</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
-https://github.com/jmnarloch/feign-okhttp-spring-cloud-starter
- 

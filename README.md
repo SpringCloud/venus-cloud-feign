@@ -7,6 +7,7 @@
 
 | 版本 | spring boot版本 | spring cloud 版本 |
 | --- | --- | --- |
+| 1.1.0 (开发中) | 2.1.x.RELEASE | Greenwich.RELEASE |
 | 1.0.0  | 2.0.x.RELEASE | Finchley.RELEASE |
 
  

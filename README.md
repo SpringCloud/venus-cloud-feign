@@ -2,7 +2,14 @@
   venus-cloud-feign,对Spring Cloud Feign的实战增强
   
   >如果你觉得venus-cloud-feign不错，让你很爽，烦请拨冗**“Star”**。
-  
+ 
+## Release Note
+
+| 版本 | spring boot版本 | spring cloud 版本 |
+| --- | --- | --- |
+| 1.0.0  | 2.0.x.RELEASE | Finchley.RELEASE |
+
+ 
 ## 项目开发规范
  ### 包名规范
     cn.springcloud.feign

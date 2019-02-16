@@ -3,8 +3,11 @@ package cn.springcloud.feign;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.AnnotatedParameterProcessor;
+import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
@@ -36,6 +39,10 @@ import java.util.List;
 @ConditionalOnClass(Feign.class)
 public class VenusFeignAutoConfig {
 
+
+    @Autowired(required = false)
+    private List<AnnotatedParameterProcessor> parameterProcessors = new ArrayList<>();
+
     @Autowired
     private RequestMappingHandlerAdapter adapter;
 
@@ -48,12 +55,9 @@ public class VenusFeignAutoConfig {
     }
 
     @Bean
-    public VenusSpringMvcContract feignSpringMvcContract(@Autowired(required = false) List<AnnotatedParameterProcessor> parameterProcessors,
+    public VenusSpringMvcContract feignSpringMvcContract(
                                                          ConversionService conversionService) {
-        if (null == parameterProcessors) {
-            parameterProcessors = new ArrayList<>();
-        }
-        return new VenusSpringMvcContract(parameterProcessors, conversionService);
+        return new VenusSpringMvcContract(this.parameterProcessors, conversionService);
     }
 
     public static MethodParameter interfaceMethodParameter(MethodParameter parameter, Class annotationType) {

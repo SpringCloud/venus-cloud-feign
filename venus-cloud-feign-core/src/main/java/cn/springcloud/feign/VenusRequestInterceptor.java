@@ -28,7 +28,6 @@ public class VenusRequestInterceptor implements RequestInterceptor {
             try {
                 JsonNode jsonNode = objectMapper.readTree(template.body());
                 template.body(null);
-
                 Map<String, Collection<String>> queries = new HashMap<>(jsonNode.size());
                 buildQuery(jsonNode, "", queries);
                 template.queries(queries);

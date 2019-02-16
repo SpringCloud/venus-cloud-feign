@@ -16,6 +16,8 @@ import org.springframework.cloud.openfeign.AnnotatedParameterProcessor;
 import org.springframework.cloud.openfeign.annotation.PathVariableParameterProcessor;
 import org.springframework.cloud.openfeign.annotation.RequestHeaderParameterProcessor;
 import org.springframework.cloud.openfeign.annotation.RequestParamParameterProcessor;
+import org.springframework.cloud.openfeign.support.FeignUtils;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.DefaultParameterNameDiscoverer;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static feign.Util.checkState;
 import static feign.Util.emptyToNull;
+import static java.util.Optional.ofNullable;
 import static org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation;
 
 /**
@@ -366,7 +369,7 @@ public class VenusSpringMvcContract extends VenusBaseContract implements Resourc
     }
 
     private class SimpleAnnotatedParameterContext
-            implements AnnotatedParameterProcessor.AnnotatedParameterContext {
+            implements AnnotatedParameterProcessor.AnnotatedParameterContext  {
 
         private final MethodMetadata methodMetadata;
 
@@ -396,7 +399,7 @@ public class VenusSpringMvcContract extends VenusBaseContract implements Resourc
         @Override
         public Collection<String> setTemplateParameter(String name,
                                                        Collection<String> rest) {
-            return addTemplatedParam(rest, name);
+            return addTemplateParameter(rest, name);
         }
     }
 
@@ -413,6 +416,13 @@ public class VenusSpringMvcContract extends VenusBaseContract implements Resourc
             return this.conversionService.convert(value, String.class);
         }
 
+    }
+
+    static Collection<String> addTemplateParameter(Collection<String> possiblyNull,
+                                                   String paramName) {
+        Collection<String> params = ofNullable(possiblyNull).orElse(new ArrayList<>());
+        params.add(String.format("{%s}", paramName));
+        return params;
     }
 }
 

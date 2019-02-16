@@ -12,7 +12,7 @@
 <dependency>
     <groupId>cn.springcloud.feign</groupId>
     <artifactId>venus-cloud-starter-feign</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
